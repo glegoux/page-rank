@@ -13,12 +13,14 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
+import com.google.common.base.Joiner;
+
 
 public class Job1Mapper extends Mapper<LongWritable, Text, Text, Text> {
     
 	// Init pattern variable
     private static final Pattern linksPattern = Pattern.compile("\\[.+?\\]");
-
+    
     /**
      * Job1 Map method
      */
