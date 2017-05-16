@@ -18,5 +18,5 @@ sudo update-java-alternatives --set /path/to/java/version
 
 On this platform  http://tiresias.enst.fr/submitServer/ :
 
-login: glegoux
+login: glegoux  
 pwd: A9EArXU360f55LTc
