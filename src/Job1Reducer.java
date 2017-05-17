@@ -30,6 +30,7 @@ public class Job1Reducer extends Reducer<Text, Text, Text, Text> {
     }
     // Sort outLinks by ascending order
     Collections.sort(outLinks);
+    System.out.println(outLinks);
     // Append default page rank + outLinks
     String links = Joiner.on(',').join(outLinks);
     Text result = new Text(Joiner.on('\t').join("1.0", links));

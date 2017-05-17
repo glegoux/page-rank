@@ -20,8 +20,12 @@ public class Job3Mapper extends Mapper<LongWritable, Text, FloatWritable, Text> 
   @Override
   public void map(LongWritable key, Text value, Context context) throws IOException,
       InterruptedException {
-    // TODO if needed
-    throw new UnsupportedOperationException("Job3Mapper: map: Not implemented yet");
+    String[] pageAndRank = getPageAndRank(key, value);
+
+    Text page = new Text(pageAndRank[0]);
+    FloatWritable rank = new FloatWritable(Float.parseFloat(pageAndRank[1]));
+
+    context.write(rank, page);
   }
 
   /**

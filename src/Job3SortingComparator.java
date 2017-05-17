@@ -21,7 +21,6 @@ public class Job3SortingComparator extends WritableComparator {
    */
   @Override
   public int compare(WritableComparable w1, WritableComparable w2) {
-    // TODO if needed
-    throw new UnsupportedOperationException("Job3SortingComparator: compare: Not implemented yet");
+    return -super.compare(w1, w2);
   }
 }

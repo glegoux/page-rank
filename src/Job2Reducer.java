@@ -9,6 +9,8 @@ import java.io.IOException;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
+import com.google.common.base.Joiner;
+
 public class Job2Reducer extends Reducer<Text, Text, Text, Text> {
   // Initialize dumping factor to 0.85
   private static final float damping = 0.85F;
@@ -19,17 +21,47 @@ public class Job2Reducer extends Reducer<Text, Text, Text, Text> {
   @Override
   public void reduce(Text page, Iterable<Text> values, Context context) throws IOException,
       InterruptedException {
-    // For each otherPage:
-    // - check control characters
-    // - calculate pageRank share <rank> / count(<links>)
-    // - add the share to sumShareOtherPageRanks
+    
+    boolean existingPage = false;
+    String[] split;
+    float sumShareOtherPageRanks = 0;
+    String links = "";
+    String input;
 
-    // Write to output
-    // (page, rank \t outLinks)
-    // context.write(page, new Text(String.format(java.util.Locale.US,
-    // "%.4f", newRank) + links));
+    for (Text value : values) {
+      input = value.toString();
 
-    // TODO if needed
-    throw new UnsupportedOperationException("Job2Reducer: reduce: Not implemented yet");
+      if (input.equals("!")) {
+        existingPage = true;
+        continue;
+      }
+
+      if (input.startsWith("|")) {
+        links = input.substring(1);
+        continue;
+      }
+
+      split = input.split("\t");
+      float pageRank = Float.parseFloat(split[1]);
+      int countOutLinks = Integer.parseInt(split[2]);
+
+      // Add the share to sumShareOtherPageRanks
+      sumShareOtherPageRanks += (pageRank / countOutLinks);
+    }
+
+    if (!existingPage) {
+      return;
+    }
+
+
+    // Write to output (page, rank \t outLinks)
+
+    float pageRank = (1 - damping) + damping * sumShareOtherPageRanks;
+    String formattedPageRank = String.format(java.util.Locale.US, "%.4f", pageRank);
+    
+    String result = Joiner.on("\t").join(formattedPageRank, links);
+    context.write(new Text(page), new Text(result));
+    
   }
+  
 }

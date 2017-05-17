@@ -138,8 +138,8 @@ public class PublicTestPageRank extends TestCase {
   // Test Both Job2 Mapper and Reducer
   public void test04Job2MapReduce() throws IOException {
     // Add input
-    job2MapReduceDriver.withInput(new LongWritable(2), new Text("PageB\t1.0\tPageA"));
-    job2MapReduceDriver.withInput(new LongWritable(3), new Text("PageC\t1.0\tPageA"));
+    job2MapReduceDriver.withInput(new LongWritable(1), new Text("PageB\t1.0\tPageA"));
+    job2MapReduceDriver.withInput(new LongWritable(2), new Text("PageC\t1.0\tPageA"));
 
     // Add output
     job2MapReduceDriver.withOutput(new Text("PageB"), new Text("0.1500\tPageA"));
@@ -154,7 +154,7 @@ public class PublicTestPageRank extends TestCase {
     // Set input
     job3MapDriver.withInput(new LongWritable(1), new Text("PageB\t0.1500\tPageA"));
     job3MapDriver.withInput(new LongWritable(2), new Text("PageC\t0.1200\tPageA"));
-
+    
     // Set output
     job3MapDriver.withOutput(new FloatWritable(Float.parseFloat("0.1500")), new Text("PageB"));
     job3MapDriver.withOutput(new FloatWritable(Float.parseFloat("0.1200")), new Text("PageC"));
@@ -165,8 +165,8 @@ public class PublicTestPageRank extends TestCase {
   // Test Both Job3 Mapper and Sorting Comparator
   public void test06Job3MapReduce() throws IOException {
     // Add input
-    job3MapReduceDriver.withInput(new LongWritable(1), new Text("PageC\t0.1200\tPageA"));
-    job3MapReduceDriver.withInput(new LongWritable(2), new Text("PageB\t0.1500\tPageA"));
+    job3MapReduceDriver.withInput(new LongWritable(2), new Text("PageC\t0.1200\tPageA"));
+    job3MapReduceDriver.withInput(new LongWritable(1), new Text("PageB\t0.1500\tPageA"));
 
     // Add output
     job3MapReduceDriver
