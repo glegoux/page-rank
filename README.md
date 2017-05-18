@@ -1,6 +1,6 @@
 # Page Rank
 
-[Java] Page Rank with Hadoop 
+[Java] Page Rank with Hadoop 2.7.3.
 
 This project is in Java 1.7. List all java versions:  
 
