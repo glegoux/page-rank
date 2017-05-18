@@ -14,9 +14,4 @@ Set java version as default (needs root permissions):
 sudo update-java-alternatives --set /path/to/java/version
 ~~~
 
-**Submit**  
-
-On this platform  http://tiresias.enst.fr/submitServer/ :
-
-login: glegoux  
-pwd: A9EArXU360f55LTc
+Use Eclipse IDE for Java Developers Version: Luna Service Release 2 (4.4.2).
