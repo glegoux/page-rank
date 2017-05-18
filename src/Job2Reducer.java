@@ -58,9 +58,9 @@ public class Job2Reducer extends Reducer<Text, Text, Text, Text> {
 
     float pageRank = (1 - damping) + damping * sumShareOtherPageRanks;
     String formattedPageRank = String.format(java.util.Locale.US, "%.4f", pageRank);
-
     String result = links.isEmpty() ? formattedPageRank : Joiner.on("\t").join(formattedPageRank, links);
-    context.write(new Text(page), new Text(result));
+        
+    context.write(page, new Text(result));
 
   }
 
