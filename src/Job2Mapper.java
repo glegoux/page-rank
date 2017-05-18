@@ -1,7 +1,7 @@
 /***
  * Class Job2Mapper Job2 Mapper class
  * 
- * @author sgarouachi
+ * @author glegoux
  */
 
 import java.io.IOException;
@@ -26,10 +26,13 @@ public class Job2Mapper extends Mapper<LongWritable, Text, Text, Text> {
     String[] values = value.toString().split("\t");
     String sourcePage = values[0];
     String pageRank = values[1];
-    String originalLinks = values[2];
+    String originalLinks = values.length == 3 ? values[2] : "";
     // Mark existing page
     context.write(new Text(sourcePage), new Text("!"));
     // Mark page rank
+    if (originalLinks.isEmpty()) {
+      return;
+    }
     String[] outLinks = originalLinks.split(",");
     int numberOfLinks = outLinks.length;
     for (String page : outLinks) {

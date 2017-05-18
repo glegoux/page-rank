@@ -1,7 +1,7 @@
 /***
  * Class Job3Mapper Job3 Mapper class
  * 
- * @author sgarouachi
+ * @author glegoux
  */
 
 import java.io.IOException;

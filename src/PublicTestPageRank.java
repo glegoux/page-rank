@@ -1,7 +1,7 @@
 /***
  * PublicTestPageRank class Public tests for students
  * 
- * @author sgarouachi
+ * @author glegoux
  */
 
 import java.io.IOException;
@@ -88,7 +88,7 @@ public class PublicTestPageRank extends TestCase {
     job1ReduceDriver.withInput(new Text("PageC"), values);
 
     // Add output
-    job1ReduceDriver.withOutput(new Text("PageA"), new Text("1.0\t"));
+    job1ReduceDriver.withOutput(new Text("PageA"), new Text("1.0"));
     job1ReduceDriver.withOutput(new Text("PageB"), new Text("1.0\tPageA,PageD,PageE"));
     job1ReduceDriver.withOutput(new Text("PageC"), new Text("1.0\tPageD,PageE"));
 
@@ -99,16 +99,19 @@ public class PublicTestPageRank extends TestCase {
   // Test Job2 Mapper
   public void test02Job2Mapper() throws IOException {
     // Set input
-    job2MapDriver.withInput(new LongWritable(1), new Text("PageB\t1.0\tPageA"));
-    job2MapDriver.withInput(new LongWritable(2), new Text("PageC\t1.0\tPageA"));
+    job2MapDriver.withInput(new LongWritable(1), new Text("PageA\t1.0"));
+    job2MapDriver.withInput(new LongWritable(2), new Text("PageB\t1.0\tPageA"));
+    job2MapDriver.withInput(new LongWritable(3), new Text("PageC\t1.0\tPageA,PageD"));
 
     // Set output
+    job2MapDriver.withOutput(new Text("PageA"), new Text("!"));
     job2MapDriver.withOutput(new Text("PageB"), new Text("!"));
     job2MapDriver.withOutput(new Text("PageA"), new Text("PageB\t1.0\t1"));
     job2MapDriver.withOutput(new Text("PageB"), new Text("|PageA"));
     job2MapDriver.withOutput(new Text("PageC"), new Text("!"));
-    job2MapDriver.withOutput(new Text("PageA"), new Text("PageC\t1.0\t1"));
-    job2MapDriver.withOutput(new Text("PageC"), new Text("|PageA"));
+    job2MapDriver.withOutput(new Text("PageA"), new Text("PageC\t1.0\t2"));
+    job2MapDriver.withOutput(new Text("PageD"), new Text("PageC\t1.0\t2"));
+    job2MapDriver.withOutput(new Text("PageC"), new Text("|PageA,PageD"));
 
     // Run & check
     job2MapDriver.runTest();
@@ -138,12 +141,14 @@ public class PublicTestPageRank extends TestCase {
   // Test Both Job2 Mapper and Reducer
   public void test04Job2MapReduce() throws IOException {
     // Add input
-    job2MapReduceDriver.withInput(new LongWritable(1), new Text("PageB\t1.0\tPageA"));
-    job2MapReduceDriver.withInput(new LongWritable(2), new Text("PageC\t1.0\tPageA"));
+    job2MapReduceDriver.withInput(new LongWritable(1), new Text("PageA\t1.0"));
+    job2MapReduceDriver.withInput(new LongWritable(2), new Text("PageB\t1.0\tPageA"));
+    job2MapReduceDriver.withInput(new LongWritable(3), new Text("PageC\t1.0\tPageA,PageD"));
 
     // Add output
+    job2MapReduceDriver.withOutput(new Text("PageA"), new Text("1.4250"));
     job2MapReduceDriver.withOutput(new Text("PageB"), new Text("0.1500\tPageA"));
-    job2MapReduceDriver.withOutput(new Text("PageC"), new Text("0.1500\tPageA"));
+    job2MapReduceDriver.withOutput(new Text("PageC"), new Text("0.1500\tPageA,PageD"));
 
     // Run & check
     job2MapReduceDriver.runTest();

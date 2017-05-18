@@ -1,7 +1,7 @@
 /***
  * Class PageRankDriver Driver class
  * 
- * @author sgarouachi
+ * @author glegoux
  */
 
 import java.io.File;

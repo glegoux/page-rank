@@ -1,3 +1,10 @@
+/***
+ * Class Job3Reducer Job3 Reducer class
+ * 
+ * @author glegoux
+ */
+
+
 import java.io.IOException;
 
 import org.apache.hadoop.io.FloatWritable;

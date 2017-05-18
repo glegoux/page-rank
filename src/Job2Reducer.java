@@ -1,7 +1,7 @@
 /***
  * Class Job2Reducer Job2 Reducer class
  * 
- * @author sgarouachi
+ * @author glegoux
  */
 
 import java.io.IOException;
@@ -21,7 +21,7 @@ public class Job2Reducer extends Reducer<Text, Text, Text, Text> {
   @Override
   public void reduce(Text page, Iterable<Text> values, Context context) throws IOException,
       InterruptedException {
-    
+
     boolean existingPage = false;
     String[] split;
     float sumShareOtherPageRanks = 0;
@@ -58,10 +58,10 @@ public class Job2Reducer extends Reducer<Text, Text, Text, Text> {
 
     float pageRank = (1 - damping) + damping * sumShareOtherPageRanks;
     String formattedPageRank = String.format(java.util.Locale.US, "%.4f", pageRank);
-    
-    String result = Joiner.on("\t").join(formattedPageRank, links);
+
+    String result = links.isEmpty() ? formattedPageRank : Joiner.on("\t").join(formattedPageRank, links);
     context.write(new Text(page), new Text(result));
-    
+
   }
-  
+
 }

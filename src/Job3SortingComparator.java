@@ -1,7 +1,7 @@
 /***
  * Class Job3SortingComparator Job3 Sorting Comparator class
  * 
- * @author sgarouachi
+ * @author glegoux
  */
 
 import org.apache.hadoop.io.FloatWritable;
