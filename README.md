@@ -1,6 +1,6 @@
 # Page Rank
 
-[Java] Page Rank with Hadoop 2.7.3.
+Page Rank with Hadoop 2.7.3.
 
 Use Eclipse IDE for Java Developers Version: Luna Service Release 2 (4.4.2).  
 
