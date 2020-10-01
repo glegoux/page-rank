@@ -1,6 +1,6 @@
 # Page Rank
 
-Page Rank with Hadoop 2.7.3.
+Implement a page rank algorithm with Hadoop Map Reduce.
 
 Use Eclipse IDE for Java Developers Version: Luna Service Release 2 (4.4.2).  
 
